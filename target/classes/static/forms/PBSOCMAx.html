@@ -1,0 +1,147 @@
+<h3>Computing PBSocMax</h3>
+<form role="form"
+      name="PBSocMaxform">
+       <!-- Loan Type -->
+    <div class="form-group">
+      <label for="Soct0">Soc(t-1)</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="Soct0"
+           cam-variable-name="Soct0"
+           cam-variable-type="Double"
+           type="number" 
+          ng-change="calculatePBSocMaxt()"
+           />
+          
+      </div>
+
+    </div> 
+    
+     <!-- Loan Amount -->
+    <div class="form-group">
+      <label for="SocMax">SocMax</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="SocMax"
+          
+          name="SocMax"
+          type="number" 
+          ng-change="calculatePBSocMaxt()"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="R">R</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="R"
+          
+          name="R"
+          type="number" 
+          ng-change="calculatePBSocMaxt()"/>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="DeltaT">DeltaT</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="DeltaT"
+          
+          name="DeltaT"
+          type="number" 
+          ng-change="calculatePBSocMaxt()"/>
+      </div>
+    </div>
+    
+    
+     <div class="form-group">
+      <label for="PBchL">PBchL</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Long"
+          cam-variable-name="PBchL"
+          
+          name="PBchL"
+          type="number" 
+          ng-change="calculatePBSocMaxt()"/>
+      </div>
+    </div>
+      
+      <div class="form-group">
+      <label for="Q">Q</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="Q"
+          
+          name="Q"
+          type="number" 
+          ng-change="calculatePBSocMaxt()"/>
+      </div>
+    </div> 
+    
+      PBSocMax(t):
+    <p  ng-if="PBSocMaxt" class="alert alert-success">
+      {{PBSocMaxt}}
+    </p>
+
+    <p ng-if="!PBSocMaxt" class="alert alert-danger">
+      Invalid selection.
+    </p>
+
+    <!-- The following code demonstrates use of custom scripting.
+          The 'cam-script' directive makes sure the the script is loaded and can bind to the angular $scope for the form.
+          Access to form fields is provided through $scope.variablesForm.
+       -->
+    <script cam-script type="text/form-script">
+      $scope.calculatePBSocMaxt = function() {
+       var form = $scope.PBSocMaxform;
+
+        if(!form.SocMax.$valid || !form.Soct0.$valid || !form.Q.$valid || !form.R.$valid || !form.DeltaT.$valid) {
+          $scope.PBSocMaxt = undefined;
+
+        } else {
+
+          var SocMax = form.SocMax.$modelValue;
+          var Soct0 = form.Soct0.$modelValue;
+          var Q = form.Q.$modelValue;
+          var R = form.R.$modelValue;
+          var DeltaT = form.DeltaT.$modelValue;
+          // calculate monthly payment using special formula provided by Bobby G
+          $scope.PBSocMaxt = (((SocMax-Soct0)*Q)/(R*DeltaT))*(-1000);
+}
+
+        }
+      
+    </script>
+
+<div class="form-group">
+      <!--label for="PBSocMaxt">PBSocMaxt</label!-->
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PBSocMaxt"
+           cam-variable-name="PBSocMaxt"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePBSocMaxt()"
+           />
+          
+          
+      </div>
+      </div>
+      
+ 
+      </form>
+      

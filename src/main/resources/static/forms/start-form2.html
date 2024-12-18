@@ -1,0 +1,355 @@
+<h3>Energy Management System "Data input"</h3>
+<form role="form"
+      name="variablesForm">
+
+<div class="row">
+
+  <div class="col-xs-6">
+    <h2>Renewable source Power</h2>
+
+    <!-- Loan Type -->
+    <div class="form-group">
+      <label for="wind">Wind</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="WsResponse2"
+           cam-variable-name="WsResponse2"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePs()"
+           />
+          
+      </div>
+
+    </div> 
+
+
+    <!-- Loan Amount -->
+    <div class="form-group">
+      <label for="pw">Pw</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="pw"
+          
+          name="pw"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+
+    <!-- Runtime in Years -->
+    <div class="form-group">
+      <label for="radiation">Radiation</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="radiation"
+          
+          name="radiation"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+
+
+<div class="form-group">
+      <label for="ppv">Ppv</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="ppv"
+          
+          name="ppv"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+    
+    <!-- calculate monthly payment -->
+    <b>Ps</b>
+    <p ng-if="Ps" class="alert alert-success">
+      pw ({{pw}}) + ppv({{ppv}}) = {{Ps}}
+    </p>
+
+    <p ng-if="!Ps" class="alert alert-danger">
+      Invalid selection.
+    </p>
+
+    <!-- The following code demonstrates use of custom scripting.
+          The 'cam-script' directive makes sure the the script is loaded and can bind to the angular $scope for the form.
+          Access to form fields is provided through $scope.variablesForm.
+       -->
+    <script cam-script type="text/form-script">
+      $scope.calculatePs = function() {
+        var form = $scope.variablesForm;
+
+        if(!form.pw.$valid || !form.ppv.$valid ) {
+          $scope.Ps = undefined;
+
+        } else {
+
+          var pw = form.pw.$modelValue;
+          var ppv = form.ppv.$modelValue;
+          
+var PBchLAbs=form.PBchLAbs.$modelValue;
+var PBchL=form.PBchL.$modelValue;
+         
+          $scope.Ps = pw+ppv;
+        $scope.PBchLAbs=Math.abs(PBchL);
+
+        }
+      }
+
+    </script>
+<h2>Price Information</h2>
+
+    <!-- Loan Type -->
+    <div class="form-group">
+      <label for="prixAv">Average Price</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="prixAv"
+           cam-variable-name="prixAv"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePs()"
+           />
+          
+      </div>
+
+    </div> 
+
+
+    <!-- Loan Amount -->
+    <div class="form-group">
+      <label for="prixt">prix(t)</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="prixt"
+          
+          name="prixt"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-6">
+    <h2>Home demand Power</h2>
+<!-- Loan Type -->
+    <div class="form-group">
+      <label for="Ph">Ph</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="Ph"
+           cam-variable-name="Ph"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePs()"
+           />
+          
+          
+      </div>
+      
+     <div class="form-group">
+      <label for="Ps">Ps</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="Ps"
+           cam-variable-name="Ps"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePs()"
+           />
+          
+          
+      </div>
+   
+      <h2>Period time</h2>
+<!-- Loan Type -->
+    <div class="form-group">
+      <label for="WsResponse1">Start time</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="WsResponse1"
+           cam-variable-name="WsResponse1"
+           cam-variable-type="String"
+           type="String" 
+           ng-change="calculatePs()"
+           />
+          
+      </div>
+      
+      <div class="form-group">
+      <label for="Finishtime">Finish time</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="Finishtime"
+           cam-variable-name="Finishtime"
+           cam-variable-type="String"
+           type="String" 
+           />
+          
+      </div>
+
+    </div> 
+   </div>
+   
+   
+   <h2>Battery Identification</h2>
+
+    <!-- Loan Type -->
+    <div class="form-group">
+      <label for="Soct0">Soc(t-1)</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="Soct0"
+           cam-variable-name="Soct0"
+           cam-variable-type="Double"
+           type="number" 
+           ng-change="calculatePs()"
+           />
+          
+      </div>
+
+    </div> 
+
+
+    <!-- Loan Amount -->
+    <div class="form-group">
+      <label for="SocMax">SocMax</label>
+      <div class="controls">
+        <input 
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="SocMax"
+          
+          name="SocMax"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+
+    <!-- Runtime in Years -->
+    <div class="form-group">
+      <label for="SocMin">SocMin</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="SocMin"
+          
+          name="SocMin"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+
+
+<div class="form-group">
+      <label for="R">R</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="R"
+          
+          name="R"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="Q">Q</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="Q"
+          
+          name="Q"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div> 
+    
+    <div class="form-group">
+      <label for="DeltaT">DeltaT</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="DeltaT"
+          
+          name="DeltaT"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+    
+    
+     <div class="form-group">
+      <label for="PBchL">PBchL</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="PBchL"
+          
+          name="PBchL"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="PBdechL">PBdechL</label>
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="PBdechL"
+          
+          name="PBdechL"
+          type="number" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+    
+    
+    <div class="form-group">
+      
+      <div class="controls">
+        <input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="PBchLAbs"
+          
+          name="PBchLAbs"
+          type="hidden" 
+          ng-change="calculatePs()"/>
+      </div>
+    </div>
+</form>

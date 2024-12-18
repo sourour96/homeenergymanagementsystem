@@ -1,0 +1,178 @@
+<h3>Mode 3</h3>
+<form role="form"
+      name="Mode3">
+      
+      
+      <div class="form-group">
+    
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PBSocMaxt"
+           cam-variable-name="PBSocMaxt"
+           cam-variable-type="Double"
+           type="hidden" 
+          
+           ng-change="converttoString()"
+           />
+          
+      </div>
+
+    </div> 
+    <!-- Loan Type -->
+    <div class="form-group">
+     
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PchBt"
+           cam-variable-name="PchBt"
+           cam-variable-type="Double"
+           type="hidden" 
+         
+           ng-change="converttoString()"
+           />
+          
+      </div>
+
+<div class="form-group">
+      <!--label for="PBSocMaxt">PBSocMaxt</label!-->
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PBSocMint"
+           cam-variable-name="PBSocMint"
+           cam-variable-type="Double"
+           type="hidden" 
+        
+           ng-change="converttoString()"
+           />
+          
+          
+      </div>
+      </div>
+      
+ <div class="form-group">
+      <!--label for="PdechBt">PdechBt</label-->
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PdechBt"
+           cam-variable-name="PdechBt"
+           cam-variable-type="Double"
+           type="hidden" 
+           
+            ng-change="converttoString()"
+           />
+          
+      </div>
+
+    </div> 
+      
+     
+<script cam-script type="text/form-script">
+      $scope.converttoString = function() {
+        var form = $scope.Mode3;
+         
+   
+          var PchBt = form.PchBt.$modelValue;
+          var PBSocMaxt = form.PBSocMaxt.$modelValue;
+
+$scope.PchBtch = PchBt.toString();
+          $scope.PBSocMaxtch = PBSocMaxt.toString();
+
+
+
+var PBSocMint = form.PBSocMint.$modelValue;
+var PdechBt = form.PdechBt.$modelValue;
+    
+$scope.PBSocMintch = PBSocMint.toString();
+ $scope.PdechBtch = PdechBt.toString();
+
+}
+    </script>
+
+<div class="form-group">
+ <label for="PchBtch">PchB(t)</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PchBtch"
+           cam-variable-name="PchBtch"
+           cam-variable-type="String"
+           type="String" 
+           ng-change="converttoString()"
+           />
+          
+      </div>
+      </div>
+      
+       <div class="form-group">
+      <label for="PBSocMaxtch">PBSocMax(t)</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PBSocMaxtch"
+           cam-variable-name="PBSocMaxtch"
+           cam-variable-type="String"
+           type="String" 
+           ng-change="converttoString()"
+           />
+          
+      </div>
+
+    </div> 
+    
+    
+    <div class="form-group">
+      <label for="PBSocMint">PBSocMint</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PBSocMintch"
+           cam-variable-name="PBSocMintch"
+           cam-variable-type="String"
+           type="String" 
+           ng-change="converttoString()"
+           />
+          
+          
+      </div>
+      </div>
+      
+           
+ <div class="form-group">
+      <label for="PdechBt">PdechBt</label>
+      <div class="controls">
+     
+         <input 
+           class="form-control"
+           name="PdechBtch"
+           cam-variable-name="PdechBtch"
+           cam-variable-type="String"
+           type="String" 
+            ng-change="converttoString()"
+           />
+          
+      </div>
+
+    </div> 
+      
+    
+     <b>Ps-Ph<=PchB</b>
+    <p  class="alert alert-success">
+   Psell=0 
+     <br>
+    Pbuy=0; 
+     <br>
+     Balance power ensured by renewable sources and Battery!
+    </p>
+      </form>
+      

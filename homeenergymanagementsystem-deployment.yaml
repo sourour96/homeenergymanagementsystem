@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment # Type de ressource Kubernetes
+metadata:
+  name: homeenergymanagementsystem
+spec:
+  selector:
+    matchLabels:
+      app: homeenergymanagementsystem
+  replicas: 1 # Nombre de répliques qui seront créées pour ce déploiement
+  template:
+    metadata:
+      labels:
+        app: homeenergymanagementsystem
+    spec:
+      containers:
+        - name: homeenergymanagementsystem
+          image: homeenergymanagementsystem:latest # Image qui sera utilisée pour les conteneurs du cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # Le port sur lequel le conteneur s'exécute dans le cluster
