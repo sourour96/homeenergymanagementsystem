@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.workflow.compute.ComputingPBSocMaxt;
+import com.example.workflow.object.HomeEnergy;
+import com.example.workflow.object.Result;
 import com.example.workflow.service.FirebaseService;
 
 @RestController
