@@ -11,6 +11,7 @@ public class ComputingPBSocMaxt {
 	public double computePBSocMaxt(String Finishtime) throws InterruptedException, ExecutionException
 	{
 		FirebaseService firebaseService = null;
+		@SuppressWarnings("null")
 		HomeEnergy homeEnergy=firebaseService.getHomeEnergyDetails(Finishtime);
 		PBSocMaxt=((homeEnergy.getSocMax()-homeEnergy.getSoct0())*homeEnergy.getQ())/(homeEnergy.getR()*homeEnergy.getDeltaT());
 		return PBSocMaxt;

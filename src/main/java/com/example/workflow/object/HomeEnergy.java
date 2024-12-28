@@ -2,6 +2,7 @@ package com.example.workflow.object;
 
 import com.google.firebase.database.GenericTypeIndicator;
 
+@SuppressWarnings("unused")
 public class HomeEnergy {
 	private double homeDemandPower;
 	private double wind;
