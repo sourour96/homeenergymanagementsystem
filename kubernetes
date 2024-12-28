@@ -1,0 +1,31 @@
+name: HEMS.yml
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build :
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        env:
+         DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+         DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+        run: |
+          docker build -t adouni/homeenergymanagementsystem:latest .
+          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+          docker push adouni/homeenergymanagementsystem:latest
