@@ -1,4 +1,4 @@
-name: HEMS.yml
+name: HEMS CI/CD pepline
 
 on:
   push:
