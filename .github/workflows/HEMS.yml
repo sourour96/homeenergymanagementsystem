@@ -29,3 +29,42 @@ jobs:
           docker build -t adouni/homeenergymanagementsystem:latest .
           echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
           docker push adouni/homeenergymanagementsystem:latest
+          
+  deploy:
+    name: Deploy 
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@master
+        
+        - name: Login to Docker Hub
+          uses: docker/login-actions@master
+        
+          with:
+            USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+        - name: install minikube
+          uses: medyagt/setup-minikube@master
+          with:
+           minikube-version:latest
+           
+        - name: Start Minikube
+          run: |
+           minikube start --driver=docker
+
+        - name: Pull Docker Image from Docker Hub
+          env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          run: |
+           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+           docker pull adouni/homeenergymanagementsystemhems:latest
+           minikube image load adouni/homeenergymanagementsystemhems:latest
+
+        - name: Deploy to Minikube
+          run: |
+           kubectl apply -f homeenergymanagementsystem-deployment.yaml
+           kubectl apply -f homeenergymanagementsystem-service.yaml
+
